@@ -22,6 +22,7 @@ namespace Real3Dtest
         private WorkspaceAction m_workspaceAction;
         private Layer3DsAction m_layer3DsAction;
         private SceneAction m_sceneAction;
+        private AnalystAction m_analystAction;
         public MainForm()
         {
             InitializeComponent();
@@ -56,6 +57,8 @@ namespace Real3Dtest
             m_layer3DsAction = new Layer3DsAction(m_workspaceControl, m_layersControl, m_sceneControl, m_workspace);
             m_sceneAction = new SceneAction(m_workspace, m_sceneControl);
             InitSceneProperties();
+
+            m_analystAction = new AnalystAction(m_workspaceControl, m_layersControl, m_sceneControl);
         }
 
         void WorkspaceTree_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
@@ -257,6 +260,52 @@ namespace Real3Dtest
             m_buttonRemoveExcavationRegion.Enabled = false;
         }
 
+        private void m_menuSetRegion_Click(object sender, EventArgs e)
+        {
+            m_analystAction.SetRegion();
+            m_menuCutFill.Enabled = true;
+        }
 
+        private DatasetGrid GetSelectedDatasetGrid()
+        {
+            WorkspaceTreeNodeBase node = m_workspaceControl.WorkspaceTree.SelectedNode as WorkspaceTreeNodeBase;
+            WorkspaceTreeNodeDataType type = node.NodeType;
+            DatasetGrid datasetGrid = null;
+            if (type == WorkspaceTreeNodeDataType.DatasetGrid)
+            {
+                datasetGrid = node.GetData() as DatasetGrid;
+            }
+            return datasetGrid;
+        }
+
+        private void m_menuCutFill_Click(object sender, EventArgs e)
+        {
+            if (GetSelectedDatasetGrid() != null)
+            {
+                m_analystAction.DoCalculateCutFillByRegion(GetSelectedDatasetGrid());
+                m_menuCutFill.Enabled = false;
+            }
+        }
+
+        private void m_menuClearResult_Click(object sender, EventArgs e)
+        {
+            m_sceneControl.Scene.TrackingLayer.Clear();
+        }
+
+        private void m_menuCalculateSlope_Click(object sender, EventArgs e)
+        {
+            if (GetSelectedDatasetGrid() != null)
+            {
+                m_analystAction.CalculateSlope(GetSelectedDatasetGrid());
+            }
+        }
+
+        private void m_menuCalculateAspect_Click(object sender, EventArgs e)
+        {
+            if (GetSelectedDatasetGrid() != null)
+            {
+                m_analystAction.CalculateAspect(GetSelectedDatasetGrid());
+            }
+        }
     }
 }

@@ -612,12 +612,14 @@ namespace Real3Dtest
             this.m_menuClearResult.Name = "m_menuClearResult";
             this.m_menuClearResult.Size = new System.Drawing.Size(180, 22);
             this.m_menuClearResult.Text = "清除分析结果";
+            this.m_menuClearResult.Click += new System.EventHandler(this.m_menuClearResult_Click);
             // 
             // m_menuSetRegion
             // 
             this.m_menuSetRegion.Name = "m_menuSetRegion";
             this.m_menuSetRegion.Size = new System.Drawing.Size(180, 22);
             this.m_menuSetRegion.Text = "设置填挖方区域";
+            this.m_menuSetRegion.Click += new System.EventHandler(this.m_menuSetRegion_Click);
             // 
             // m_menuCutFill
             // 
@@ -625,18 +627,21 @@ namespace Real3Dtest
             this.m_menuCutFill.Name = "m_menuCutFill";
             this.m_menuCutFill.Size = new System.Drawing.Size(180, 22);
             this.m_menuCutFill.Text = "填挖方计算";
+            this.m_menuCutFill.Click += new System.EventHandler(this.m_menuCutFill_Click);
             // 
             // m_menuCalculateSlope
             // 
             this.m_menuCalculateSlope.Name = "m_menuCalculateSlope";
             this.m_menuCalculateSlope.Size = new System.Drawing.Size(180, 22);
             this.m_menuCalculateSlope.Text = "计算坡度";
+            this.m_menuCalculateSlope.Click += new System.EventHandler(this.m_menuCalculateSlope_Click);
             // 
             // m_menuCalculateAspect
             // 
             this.m_menuCalculateAspect.Name = "m_menuCalculateAspect";
             this.m_menuCalculateAspect.Size = new System.Drawing.Size(180, 22);
             this.m_menuCalculateAspect.Text = "计算坡向";
+            this.m_menuCalculateAspect.Click += new System.EventHandler(this.m_menuCalculateAspect_Click);
             // 
             // toolStripSeparator1
             // 
