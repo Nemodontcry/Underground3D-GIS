@@ -56,6 +56,9 @@ namespace Real3Dtest
             this.m_menuSaveWorkspace = new System.Windows.Forms.ToolStripMenuItem();
             this.m_menuCloseWorkspace = new System.Windows.Forms.ToolStripMenuItem();
             this.m_menuFileExit = new System.Windows.Forms.ToolStripMenuItem();
+            this.m_menuImportTXT = new System.Windows.Forms.ToolStripMenuItem();
+            this.test3DPoints = new System.Windows.Forms.ToolStripMenuItem();
+            this.m_createDatasource = new System.Windows.Forms.ToolStripMenuItem();
             this.m_menuLayer = new System.Windows.Forms.ToolStripMenuItem();
             this.m_menuAddVectorLayer = new System.Windows.Forms.ToolStripMenuItem();
             this.m_menuAddImageLayer = new System.Windows.Forms.ToolStripMenuItem();
@@ -64,6 +67,13 @@ namespace Real3Dtest
             this.m_menuLayer3DStyle = new System.Windows.Forms.ToolStripMenuItem();
             this.三维分析ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.m_menuVisibilityAnalyst = new System.Windows.Forms.ToolStripMenuItem();
+            this.地形分析ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.m_menuSetRegion = new System.Windows.Forms.ToolStripMenuItem();
+            this.m_menuCutFill = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.m_menuCalculateSlope = new System.Windows.Forms.ToolStripMenuItem();
+            this.m_menuCalculateAspect = new System.Windows.Forms.ToolStripMenuItem();
+            this.m_menuClearResult = new System.Windows.Forms.ToolStripMenuItem();
             this.m_contextMenuWorkspace = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.m_cmWorkspaceOpen = new System.Windows.Forms.ToolStripMenuItem();
             this.m_cmWorkspaceClose = new System.Windows.Forms.ToolStripMenuItem();
@@ -80,13 +90,6 @@ namespace Real3Dtest
             this.m_cmLayer3DStyle = new System.Windows.Forms.ToolStripMenuItem();
             this.m_cmLayer3DRemove = new System.Windows.Forms.ToolStripMenuItem();
             this.m_cmLayer3DFlyTo = new System.Windows.Forms.ToolStripMenuItem();
-            this.地形分析ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.m_menuClearResult = new System.Windows.Forms.ToolStripMenuItem();
-            this.m_menuSetRegion = new System.Windows.Forms.ToolStripMenuItem();
-            this.m_menuCutFill = new System.Windows.Forms.ToolStripMenuItem();
-            this.m_menuCalculateSlope = new System.Windows.Forms.ToolStripMenuItem();
-            this.m_menuCalculateAspect = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolpanel.SuspendLayout();
             this.m_groupBoxUbderground.SuspendLayout();
             this.m_groupBoxSceneProperties.SuspendLayout();
@@ -395,7 +398,9 @@ namespace Real3Dtest
             this.m_menuOpenWorkspace,
             this.m_menuSaveWorkspace,
             this.m_menuCloseWorkspace,
-            this.m_menuFileExit});
+            this.m_menuFileExit,
+            this.m_menuImportTXT,
+            this.m_createDatasource});
             this.m_menuFile.Name = "m_menuFile";
             this.m_menuFile.Size = new System.Drawing.Size(44, 21);
             this.m_menuFile.Text = "文件";
@@ -403,27 +408,49 @@ namespace Real3Dtest
             // m_menuOpenWorkspace
             // 
             this.m_menuOpenWorkspace.Name = "m_menuOpenWorkspace";
-            this.m_menuOpenWorkspace.Size = new System.Drawing.Size(148, 22);
+            this.m_menuOpenWorkspace.Size = new System.Drawing.Size(180, 22);
             this.m_menuOpenWorkspace.Text = "打开工作空间";
             this.m_menuOpenWorkspace.Click += new System.EventHandler(this.m_menuOpenWorkspace_Click);
             // 
             // m_menuSaveWorkspace
             // 
             this.m_menuSaveWorkspace.Name = "m_menuSaveWorkspace";
-            this.m_menuSaveWorkspace.Size = new System.Drawing.Size(148, 22);
+            this.m_menuSaveWorkspace.Size = new System.Drawing.Size(180, 22);
             this.m_menuSaveWorkspace.Text = "保存工作空间";
             // 
             // m_menuCloseWorkspace
             // 
             this.m_menuCloseWorkspace.Name = "m_menuCloseWorkspace";
-            this.m_menuCloseWorkspace.Size = new System.Drawing.Size(148, 22);
+            this.m_menuCloseWorkspace.Size = new System.Drawing.Size(180, 22);
             this.m_menuCloseWorkspace.Text = "关闭工作空间";
             // 
             // m_menuFileExit
             // 
             this.m_menuFileExit.Name = "m_menuFileExit";
-            this.m_menuFileExit.Size = new System.Drawing.Size(148, 22);
+            this.m_menuFileExit.Size = new System.Drawing.Size(180, 22);
             this.m_menuFileExit.Text = "退出";
+            // 
+            // m_menuImportTXT
+            // 
+            this.m_menuImportTXT.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.test3DPoints});
+            this.m_menuImportTXT.Name = "m_menuImportTXT";
+            this.m_menuImportTXT.Size = new System.Drawing.Size(180, 22);
+            this.m_menuImportTXT.Text = "导入txt文件";
+            // 
+            // test3DPoints
+            // 
+            this.test3DPoints.Name = "test3DPoints";
+            this.test3DPoints.Size = new System.Drawing.Size(160, 22);
+            this.test3DPoints.Text = "测试三维点数据";
+            this.test3DPoints.Click += new System.EventHandler(this.test3DPoints_Click);
+            // 
+            // m_createDatasource
+            // 
+            this.m_createDatasource.Name = "m_createDatasource";
+            this.m_createDatasource.Size = new System.Drawing.Size(180, 22);
+            this.m_createDatasource.Text = "新建数据源";
+            this.m_createDatasource.Click += new System.EventHandler(this.m_createDatasource_Click);
             // 
             // m_menuLayer
             // 
@@ -480,8 +507,61 @@ namespace Real3Dtest
             // m_menuVisibilityAnalyst
             // 
             this.m_menuVisibilityAnalyst.Name = "m_menuVisibilityAnalyst";
-            this.m_menuVisibilityAnalyst.Size = new System.Drawing.Size(180, 22);
+            this.m_menuVisibilityAnalyst.Size = new System.Drawing.Size(148, 22);
             this.m_menuVisibilityAnalyst.Text = "通视分析";
+            // 
+            // 地形分析ToolStripMenuItem
+            // 
+            this.地形分析ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.m_menuSetRegion,
+            this.m_menuCutFill,
+            this.toolStripSeparator1,
+            this.m_menuCalculateSlope,
+            this.m_menuCalculateAspect});
+            this.地形分析ToolStripMenuItem.Name = "地形分析ToolStripMenuItem";
+            this.地形分析ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.地形分析ToolStripMenuItem.Text = "地形分析";
+            // 
+            // m_menuSetRegion
+            // 
+            this.m_menuSetRegion.Name = "m_menuSetRegion";
+            this.m_menuSetRegion.Size = new System.Drawing.Size(160, 22);
+            this.m_menuSetRegion.Text = "设置填挖方区域";
+            this.m_menuSetRegion.Click += new System.EventHandler(this.m_menuSetRegion_Click);
+            // 
+            // m_menuCutFill
+            // 
+            this.m_menuCutFill.Enabled = false;
+            this.m_menuCutFill.Name = "m_menuCutFill";
+            this.m_menuCutFill.Size = new System.Drawing.Size(160, 22);
+            this.m_menuCutFill.Text = "填挖方计算";
+            this.m_menuCutFill.Click += new System.EventHandler(this.m_menuCutFill_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(157, 6);
+            // 
+            // m_menuCalculateSlope
+            // 
+            this.m_menuCalculateSlope.Name = "m_menuCalculateSlope";
+            this.m_menuCalculateSlope.Size = new System.Drawing.Size(160, 22);
+            this.m_menuCalculateSlope.Text = "计算坡度";
+            this.m_menuCalculateSlope.Click += new System.EventHandler(this.m_menuCalculateSlope_Click);
+            // 
+            // m_menuCalculateAspect
+            // 
+            this.m_menuCalculateAspect.Name = "m_menuCalculateAspect";
+            this.m_menuCalculateAspect.Size = new System.Drawing.Size(160, 22);
+            this.m_menuCalculateAspect.Text = "计算坡向";
+            this.m_menuCalculateAspect.Click += new System.EventHandler(this.m_menuCalculateAspect_Click);
+            // 
+            // m_menuClearResult
+            // 
+            this.m_menuClearResult.Name = "m_menuClearResult";
+            this.m_menuClearResult.Size = new System.Drawing.Size(148, 22);
+            this.m_menuClearResult.Text = "清除分析结果";
+            this.m_menuClearResult.Click += new System.EventHandler(this.m_menuClearResult_Click);
             // 
             // m_contextMenuWorkspace
             // 
@@ -595,59 +675,6 @@ namespace Real3Dtest
             this.m_cmLayer3DFlyTo.Size = new System.Drawing.Size(160, 22);
             this.m_cmLayer3DFlyTo.Text = "快速定位至图层";
             // 
-            // 地形分析ToolStripMenuItem
-            // 
-            this.地形分析ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.m_menuSetRegion,
-            this.m_menuCutFill,
-            this.toolStripSeparator1,
-            this.m_menuCalculateSlope,
-            this.m_menuCalculateAspect});
-            this.地形分析ToolStripMenuItem.Name = "地形分析ToolStripMenuItem";
-            this.地形分析ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.地形分析ToolStripMenuItem.Text = "地形分析";
-            // 
-            // m_menuClearResult
-            // 
-            this.m_menuClearResult.Name = "m_menuClearResult";
-            this.m_menuClearResult.Size = new System.Drawing.Size(180, 22);
-            this.m_menuClearResult.Text = "清除分析结果";
-            this.m_menuClearResult.Click += new System.EventHandler(this.m_menuClearResult_Click);
-            // 
-            // m_menuSetRegion
-            // 
-            this.m_menuSetRegion.Name = "m_menuSetRegion";
-            this.m_menuSetRegion.Size = new System.Drawing.Size(180, 22);
-            this.m_menuSetRegion.Text = "设置填挖方区域";
-            this.m_menuSetRegion.Click += new System.EventHandler(this.m_menuSetRegion_Click);
-            // 
-            // m_menuCutFill
-            // 
-            this.m_menuCutFill.Enabled = false;
-            this.m_menuCutFill.Name = "m_menuCutFill";
-            this.m_menuCutFill.Size = new System.Drawing.Size(180, 22);
-            this.m_menuCutFill.Text = "填挖方计算";
-            this.m_menuCutFill.Click += new System.EventHandler(this.m_menuCutFill_Click);
-            // 
-            // m_menuCalculateSlope
-            // 
-            this.m_menuCalculateSlope.Name = "m_menuCalculateSlope";
-            this.m_menuCalculateSlope.Size = new System.Drawing.Size(180, 22);
-            this.m_menuCalculateSlope.Text = "计算坡度";
-            this.m_menuCalculateSlope.Click += new System.EventHandler(this.m_menuCalculateSlope_Click);
-            // 
-            // m_menuCalculateAspect
-            // 
-            this.m_menuCalculateAspect.Name = "m_menuCalculateAspect";
-            this.m_menuCalculateAspect.Size = new System.Drawing.Size(180, 22);
-            this.m_menuCalculateAspect.Text = "计算坡向";
-            this.m_menuCalculateAspect.Click += new System.EventHandler(this.m_menuCalculateAspect_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -741,6 +768,9 @@ namespace Real3Dtest
         private System.Windows.Forms.ToolStripMenuItem m_menuCalculateSlope;
         private System.Windows.Forms.ToolStripMenuItem m_menuCalculateAspect;
         private System.Windows.Forms.ToolStripMenuItem m_menuClearResult;
+        private System.Windows.Forms.ToolStripMenuItem m_menuImportTXT;
+        private System.Windows.Forms.ToolStripMenuItem test3DPoints;
+        private System.Windows.Forms.ToolStripMenuItem m_createDatasource;
     }
 }
 

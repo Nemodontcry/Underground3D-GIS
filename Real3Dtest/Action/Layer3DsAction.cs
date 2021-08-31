@@ -41,6 +41,8 @@ namespace Real3Dtest.Action
                 {
                     Layer3Ds layers = m_sceneControl.Scene.Layers;
                     layers.Add(openFileDialog.FileName, Layer3DType.VectorFile, true);
+                    //Console.WriteLine();
+                    
                 }
                 catch (Exception ex)
                 {

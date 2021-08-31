@@ -23,6 +23,7 @@ namespace Real3Dtest
         private Layer3DsAction m_layer3DsAction;
         private SceneAction m_sceneAction;
         private AnalystAction m_analystAction;
+        private GeneratePoint m_generatePoint;
         public MainForm()
         {
             InitializeComponent();
@@ -59,6 +60,7 @@ namespace Real3Dtest
             InitSceneProperties();
 
             m_analystAction = new AnalystAction(m_workspaceControl, m_layersControl, m_sceneControl);
+            m_generatePoint = new GeneratePoint(m_workspaceControl, m_layersControl, m_sceneControl, m_workspace);
         }
 
         void WorkspaceTree_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
@@ -75,6 +77,8 @@ namespace Real3Dtest
                 case WorkspaceTreeNodeDataType.Dataset:
                 { 
                     Dataset dataset = node.GetData() as Dataset;
+                        Console.WriteLine(dataset.PrjCoordSys.EPSGCode);
+                        Console.WriteLine(dataset.PrjCoordSys.Name);
                     if (m_layersControl.Map != null)
                     {
                         m_layersControl.Map.Layers.Add(dataset, true);
@@ -84,15 +88,10 @@ namespace Real3Dtest
                         //栅格数据
                         if (dataset.Type == DatasetType.Grid)
                         {
-                                //m_sceneControl.Scene.Layers.Add(dataset, new Layer3DSettingGrid(), true);
-                                //Console.WriteLine(m_sceneControl.Scene.Workspace);
-                                
                                 AddGridDatasetDlg dialog = new AddGridDatasetDlg();
                                 dialog.m_sceneControl = m_sceneControl;
                                 dialog.dataset = dataset;
                                 dialog.Show();
-                                //Console.WriteLine(dataset);
-                                //Console.WriteLine("dialog set");
                         }
                         //其他类型数据
                         else
@@ -142,7 +141,6 @@ namespace Real3Dtest
                 default:
                     break;
             }
-            //throw new NotImplementedException();
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -306,6 +304,17 @@ namespace Real3Dtest
             {
                 m_analystAction.CalculateAspect(GetSelectedDatasetGrid());
             }
+        }
+
+        private void test3DPoints_Click(object sender, EventArgs e)
+        {
+            //m_generatePoint.CreateUDBDatasource();
+            m_generatePoint.addPointstoScene();
+        }
+
+        private void m_createDatasource_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

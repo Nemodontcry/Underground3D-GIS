@@ -72,6 +72,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Action\AnalystAction.cs" />
+    <Compile Include="Action\GeneratePoint.cs" />
     <Compile Include="Action\Layer3DsAction.cs" />
     <Compile Include="Action\SceneAction.cs" />
     <Compile Include="Action\WorkspaceAction.cs" />
