@@ -10,7 +10,7 @@ using SuperMap.Data;
 using SuperMap.UI;
 using System.Diagnostics;
 //using Real3Dtest.Dialog;
-
+using Mono.Csv;
 
 namespace Real3Dtest.Action
 {
@@ -73,26 +73,64 @@ namespace Real3Dtest.Action
         public void addPointstoScene()
         {
             CreateUDBDatasource();
-            double x = 112.5;
-            double y = 28.1;
-            double z = 1000;
-            Point3D testpoint = new Point3D(x, y, z);
-            GeoPoint3D geoPoint3D = new GeoPoint3D(testpoint);
+            List<List<object>> csvdata = getCSVfile();
+            DatasetVector pointDataset = CSVtoDataset(csvdata);
+            m_sceneControl.Scene.Layers.Add(pointDataset, new Layer3DSettingVector(), true);
+            m_sceneControl.Scene.Refresh();
+        }
 
-            DatasetVectorInfo info = new DatasetVectorInfo(g_pointDataasetName, DatasetType.Point3D);
+        public List<List<object>> getCSVfile()
+        {
+            List<List<string>> csvfile = CsvFileReader.ReadAll("I:\\ServerTool\\supermap-iobjectsdotnet-10.1.2-19530-86195-all\\SampleData\\测试数据\\testdata28.csv", Encoding.GetEncoding("gbk"));
+            //新建一个list保存csv中的数据 
+            List<List<object>> dataGrid = new List<List<object>>();
+            //把数字从str转为double
+            foreach (var row in csvfile)
+            {
+                List<object> rowList = new List<object>();
+                foreach (var cell in row)
+                {
+                    double numDouble3;
+                    if (double.TryParse(cell, out numDouble3))
+                    {
+                        rowList.Add(numDouble3);
+                    }
+                    else
+                    {
+                        rowList.Add(cell);
+                    }
+                }
+                dataGrid.Add(rowList);
+            }
+            return dataGrid;
+        }
+
+        public DatasetVector CSVtoDataset(List<List<object>> csvdata)
+        {
+            DatasetVectorInfo info = new DatasetVectorInfo("testRandomData", DatasetType.Point3D);
             DatasetVector dataset = m_datasource.Datasets.Create(info);
             Recordset recordset = dataset.GetRecordset(false, CursorType.Dynamic);
 
-            recordset.AddNew(geoPoint3D);
-            recordset.Update();
-            Console.WriteLine(recordset.GetValues());
+
+            for (int i = 1; i < csvdata.Count; i++)//csvdata.Count
+            {
+                double x = (double)csvdata[i][1];
+                double y = (double)csvdata[i][2];
+                double z = (double)csvdata[i][3];
+                Point3D tmppoint = new Point3D(x, y, z);
+                GeoPoint3D geoPoint3D = new GeoPoint3D(tmppoint);
+                recordset.AddNew(geoPoint3D);
+                recordset.Update();
+            }
             PrjCoordSys dl = new PrjCoordSys();
             dl.FromEPSGCode(4326);//4326为GCS_WGS_1984
             dataset.PrjCoordSys = dl;
-
-            m_sceneControl.Scene.Layers.Add(dataset, new Layer3DSettingVector(), true);
-
+            return dataset;
         }
 
+
+
     }
+
+
 }
