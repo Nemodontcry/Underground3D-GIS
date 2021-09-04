@@ -65,8 +65,14 @@
     <Reference Include="SuperMap.Realspace">
       <HintPath>I:\SuperMap_Project\supermap-iobjectsdotnet-10.1.2-19530-86195-all\Bin\SuperMap.Realspace.dll</HintPath>
     </Reference>
+    <Reference Include="SuperMap.Realspace.NetworkAnalyst">
+      <HintPath>I:\ServerTool\SuperMapBin\SuperMap.Realspace.NetworkAnalyst.dll</HintPath>
+    </Reference>
     <Reference Include="SuperMap.Realspace.SpatialAnalyst">
       <HintPath>I:\ServerTool\SuperMapBin\SuperMap.Realspace.SpatialAnalyst.dll</HintPath>
+    </Reference>
+    <Reference Include="SuperMap.Realspace.ThreeDDesigner">
+      <HintPath>I:\ServerTool\SuperMapBin\SuperMap.Realspace.ThreeDDesigner.dll</HintPath>
     </Reference>
     <Reference Include="SuperMap.UI.Controls">
       <HintPath>I:\SuperMap_Project\supermap-iobjectsdotnet-10.1.2-19530-86195-all\Bin\SuperMap.UI.Controls.dll</HintPath>
@@ -89,6 +95,8 @@
     <Compile Include="Action\AnalystAction.cs" />
     <Compile Include="Action\GeneratePoint.cs" />
     <Compile Include="Action\Layer3DsAction.cs" />
+    <Compile Include="Action\PointsBuildGeoBody.cs" />
+    <Compile Include="Action\QueryAction.cs" />
     <Compile Include="Action\SceneAction.cs" />
     <Compile Include="Action\WorkspaceAction.cs" />
     <Compile Include="Dialog\AddGridDatasetDlg.cs">
@@ -96,6 +104,12 @@
     </Compile>
     <Compile Include="Dialog\AddGridDatasetDlg.Designer.cs">
       <DependentUpon>AddGridDatasetDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog\QueryDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialog\QueryDlg.Designer.cs">
+      <DependentUpon>QueryDlg.cs</DependentUpon>
     </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -109,6 +123,9 @@
     <Compile Include="Utils\LiteCsvParser.cs" />
     <EmbeddedResource Include="Dialog\AddGridDatasetDlg.resx">
       <DependentUpon>AddGridDatasetDlg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialog\QueryDlg.resx">
+      <DependentUpon>QueryDlg.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

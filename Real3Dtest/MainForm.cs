@@ -18,17 +18,50 @@ namespace Real3Dtest
 {
     public partial class MainForm : Form
     {
+        SceneControl m_sceneControl = null;
         private Workspace m_workspace;
         private WorkspaceAction m_workspaceAction;
         private Layer3DsAction m_layer3DsAction;
         private SceneAction m_sceneAction;
         private AnalystAction m_analystAction;
         private GeneratePoint m_generatePoint;
+        private PointsBuildGeoBody m_PointsBuildGeoBody;
         public MainForm()
         {
             InitializeComponent();
+            this.CreateSceneControl();
         }
 
+        private void CreateSceneControl()
+        {
+            //////////////////////////////////////////////////////////////////////////////
+            if (m_sceneControl == null || m_sceneControl.IsDisposed)
+            {
+                m_sceneControl = new SuperMap.UI.SceneControl();
+
+                m_sceneControl.Action = SuperMap.UI.Action3D.Pan;
+                m_sceneControl.BackColor = System.Drawing.Color.White;
+                m_sceneControl.Dock = System.Windows.Forms.DockStyle.Fill;
+                m_sceneControl.InteractionMode = SuperMap.UI.InteractionMode3D.Default;
+                m_sceneControl.IsAlwaysUpdate = false;
+                m_sceneControl.IsCursorCustomized = false;
+                m_sceneControl.IsFPSVisible = false;
+                m_sceneControl.IsKeyboardNavigationEnabled = false;
+                m_sceneControl.IsMouseNavigationEnabled = true;
+                m_sceneControl.IsStatusBarVisible = true;
+                m_sceneControl.IsWaitCursorEnabled = false;
+                m_sceneControl.Location = new System.Drawing.Point(3, 3);
+                m_sceneControl.Margin = new System.Windows.Forms.Padding(0);
+                m_sceneControl.Name = "m_sceneControl";
+                m_sceneControl.Size = new System.Drawing.Size(475, 356);
+                m_sceneControl.TabIndex = 0;
+
+                this.tabPage1.Controls.Add(m_sceneControl);
+                m_sceneControl.Scene.Workspace = m_workspace;
+
+                //this.Initialize();
+            }
+        }
         private void MainForm_Load(object sender, EventArgs e)
         {
             try
@@ -41,8 +74,9 @@ namespace Real3Dtest
                 m_workspaceControl.WorkspaceTree.Workspace = m_workspace;
                 m_sceneControl.Scene.Workspace = m_workspace;
                 m_layersControl.Scene = m_sceneControl.Scene;
-                m_sceneControl.Action = Action3D.Pan;
-                m_sceneControl.IsKeyboardNavigationEnabled = true;
+                m_sceneControl.Action = SuperMap.UI.Action3D.Pan;
+                //m_sceneControl.IsKeyboardNavigationEnabled = true;
+                m_sceneControl.IsMouseNavigationEnabled = true;
             }
             catch (System.Exception ex)
             {
@@ -61,6 +95,7 @@ namespace Real3Dtest
 
             m_analystAction = new AnalystAction(m_workspaceControl, m_layersControl, m_sceneControl);
             m_generatePoint = new GeneratePoint(m_workspaceControl, m_layersControl, m_sceneControl, m_workspace);
+            m_PointsBuildGeoBody = new PointsBuildGeoBody(m_workspaceControl, m_layersControl, m_sceneControl, m_workspace);
         }
 
         void WorkspaceTree_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
@@ -314,7 +349,12 @@ namespace Real3Dtest
 
         private void m_createDatasource_Click(object sender, EventArgs e)
         {
+            m_PointsBuildGeoBody.testfuc();
+        }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.m_sceneControl.Scene.ViewEntire();
         }
     }
 }
