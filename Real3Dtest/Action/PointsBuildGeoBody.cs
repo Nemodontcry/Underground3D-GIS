@@ -38,6 +38,7 @@ namespace Real3Dtest.Action
             List<List<object>>  csvdata = getCSVfile();
             DatasetVector targetDataset = CSVtoDataset(csvdata);
             TestScene(targetDataset, m_sceneControl.Scene);
+            Geomodeltest(csvdata);
             //Recordset recordset = targetDataset.GetRecordset(false, CursorType.Dynamic);
             //Geometry geometry  = recordset.GetGeometry();
             //ListAll(recordset);
@@ -142,6 +143,7 @@ namespace Real3Dtest.Action
             geoStyle3D.MarkerSize = 10;
             layer3DSettingVector.Style = geoStyle3D;
 
+            //必须设置数据集高度模式，才可以正常显示高程
             AltitudeMode altitudeMode = new AltitudeMode();
             altitudeMode = AltitudeMode.Absolute;
             layer3DSettingVector.Style.AltitudeMode = altitudeMode;
@@ -212,5 +214,62 @@ namespace Real3Dtest.Action
             content = star + content + star;
             Console.WriteLine(content);
         }
+
+        public void Geomodeltest(List<List<object>> datagrid)
+        {
+            //string filename = System.IO.Path.GetFileName(filepath);
+            //string[] temp = filename.Split('.');
+            //DatasetVectorInfo info = new DatasetVectorInfo(temp[0], DatasetType.Point3D);
+            //DatasetVector dataset = m_datasource.Datasets.Create(info);
+            //Recordset recordset = dataset.GetRecordset(false, CursorType.Dynamic);
+
+            //List<Point3D> point3Darr = new List<Point3D>();
+            Point3Ds point3Ds = new Point3Ds();
+            for (int i = 1; i < datagrid.Count; i++)//csvdata.Count
+            {
+                double x = (double)datagrid[i][1];
+                double y = (double)datagrid[i][2];
+                double z = (double)datagrid[i][3];
+                Point3D tmppoint = new Point3D(x, y, z);
+                point3Ds.Add(tmppoint);
+
+                //GeoPoint3D geoPoint3D = new GeoPoint3D(tmppoint);
+                //recordset.AddNew(geoPoint3D);
+                //recordset.Update();
+            }
+            List<double> maxHighList = new List<double>();
+            List<double> minHighList = new List<double>();
+            for (int i = 0; i < point3Ds.Count; i++)
+            {
+                maxHighList.Add(i + 200);
+                minHighList.Add(i + 100);
+            }
+            GeoModel3D geoModel3D = ModelBuilder3D.BuildGeoBody(point3Ds, maxHighList, minHighList);
+            //geoModel3D.IsLonLat = true;
+
+
+            //AltitudeMode altitudeMode = new AltitudeMode();
+            //altitudeMode = AltitudeMode.Absolute;
+
+
+            //必须设置模型style的高度模式，才可以正常显示高程位置
+            //这里使用的是绝对海拔高程模式
+
+            //新建一个style3d对象
+            GeoStyle3D m_style3d = new GeoStyle3D();
+            m_style3d.AltitudeMode = AltitudeMode.Absolute;
+            //把style3d对象给geomodel3d对象
+            geoModel3D.Style3D = m_style3d;
+
+            m_sceneControl.Scene.TrackingLayer.Add(geoModel3D, "test");
+            //Add(geoModel3D);
+            //PrjCoordSys dl = new PrjCoordSys();
+            //dl.FromEPSGCode(4326);//4326为GCS_WGS_1984
+            //dataset.PrjCoordSys = dl;
+
+            //return dataset;
+        }
+
+
     }
 }
