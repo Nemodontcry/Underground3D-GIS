@@ -32,12 +32,8 @@ namespace Real3Dtest
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.toolpanel = new System.Windows.Forms.Panel();
-            this.m_groupBoxUbderground = new System.Windows.Forms.GroupBox();
-            this.m_buttonRemoveExcavationRegion = new System.Windows.Forms.Button();
-            this.m_buttonAddExcavationRegion = new System.Windows.Forms.Button();
-            this.m_hScrollBarTransparency = new System.Windows.Forms.HScrollBar();
-            this.m_labelTransparency = new System.Windows.Forms.Label();
-            this.m_checkBoxUnderground = new System.Windows.Forms.CheckBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.m_groupBoxSceneProperties = new System.Windows.Forms.GroupBox();
             this.m_checkBoxSun = new System.Windows.Forms.CheckBox();
             this.m_checkBoxAtmosphere = new System.Windows.Forms.CheckBox();
@@ -46,10 +42,19 @@ namespace Real3Dtest
             this.m_checkBoxNavigation = new System.Windows.Forms.CheckBox();
             this.m_checkBoxScaleLegend = new System.Windows.Forms.CheckBox();
             this.m_checkBoxStatusBar = new System.Windows.Forms.CheckBox();
+            this.m_groupBoxUbderground = new System.Windows.Forms.GroupBox();
+            this.m_buttonRemoveExcavationRegion = new System.Windows.Forms.Button();
+            this.m_buttonAddExcavationRegion = new System.Windows.Forms.Button();
+            this.m_hScrollBarTransparency = new System.Windows.Forms.HScrollBar();
+            this.m_labelTransparency = new System.Windows.Forms.Label();
+            this.m_checkBoxUnderground = new System.Windows.Forms.CheckBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.m_workspaceControl = new SuperMap.UI.WorkspaceControl();
             this.m_layersControl = new SuperMap.UI.LayersControl();
+            this.m_tabControl = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.m_menuStripMain = new System.Windows.Forms.MenuStrip();
             this.m_menuFile = new System.Windows.Forms.ToolStripMenuItem();
             this.m_menuOpenWorkspace = new System.Windows.Forms.ToolStripMenuItem();
@@ -93,14 +98,11 @@ namespace Real3Dtest
             this.m_cmLayer3DStyle = new System.Windows.Forms.ToolStripMenuItem();
             this.m_cmLayer3DRemove = new System.Windows.Forms.ToolStripMenuItem();
             this.m_cmLayer3DFlyTo = new System.Windows.Forms.ToolStripMenuItem();
-            this.m_tabControl = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.m_GeoModelBoolCal = new System.Windows.Forms.ToolStripMenuItem();
             this.toolpanel.SuspendLayout();
-            this.m_groupBoxUbderground.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.m_groupBoxSceneProperties.SuspendLayout();
+            this.m_groupBoxUbderground.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -109,11 +111,10 @@ namespace Real3Dtest
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
+            this.m_tabControl.SuspendLayout();
             this.m_menuStripMain.SuspendLayout();
             this.m_contextMenuWorkspace.SuspendLayout();
             this.m_contextMenuLayer3D.SuspendLayout();
-            this.m_tabControl.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolpanel
@@ -126,70 +127,26 @@ namespace Real3Dtest
             this.toolpanel.Size = new System.Drawing.Size(1205, 35);
             this.toolpanel.TabIndex = 2;
             // 
-            // m_groupBoxUbderground
+            // groupBox1
             // 
-            this.m_groupBoxUbderground.Controls.Add(this.m_buttonRemoveExcavationRegion);
-            this.m_groupBoxUbderground.Controls.Add(this.m_buttonAddExcavationRegion);
-            this.m_groupBoxUbderground.Controls.Add(this.m_hScrollBarTransparency);
-            this.m_groupBoxUbderground.Controls.Add(this.m_labelTransparency);
-            this.m_groupBoxUbderground.Controls.Add(this.m_checkBoxUnderground);
-            this.m_groupBoxUbderground.Location = new System.Drawing.Point(655, 25);
-            this.m_groupBoxUbderground.Name = "m_groupBoxUbderground";
-            this.m_groupBoxUbderground.Size = new System.Drawing.Size(439, 35);
-            this.m_groupBoxUbderground.TabIndex = 2;
-            this.m_groupBoxUbderground.TabStop = false;
-            this.m_groupBoxUbderground.Text = "地下";
+            this.groupBox1.Controls.Add(this.button1);
+            this.groupBox1.Location = new System.Drawing.Point(4, 0);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(179, 35);
+            this.groupBox1.TabIndex = 2;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "场景控制";
             // 
-            // m_buttonRemoveExcavationRegion
+            // button1
             // 
-            this.m_buttonRemoveExcavationRegion.Enabled = false;
-            this.m_buttonRemoveExcavationRegion.Location = new System.Drawing.Point(339, 9);
-            this.m_buttonRemoveExcavationRegion.Name = "m_buttonRemoveExcavationRegion";
-            this.m_buttonRemoveExcavationRegion.Size = new System.Drawing.Size(75, 23);
-            this.m_buttonRemoveExcavationRegion.TabIndex = 5;
-            this.m_buttonRemoveExcavationRegion.Text = "清除";
-            this.m_buttonRemoveExcavationRegion.UseVisualStyleBackColor = true;
-            this.m_buttonRemoveExcavationRegion.Click += new System.EventHandler(this.m_buttonRemoveExcavationRegion_Click);
-            // 
-            // m_buttonAddExcavationRegion
-            // 
-            this.m_buttonAddExcavationRegion.Enabled = false;
-            this.m_buttonAddExcavationRegion.Location = new System.Drawing.Point(249, 9);
-            this.m_buttonAddExcavationRegion.Name = "m_buttonAddExcavationRegion";
-            this.m_buttonAddExcavationRegion.Size = new System.Drawing.Size(75, 23);
-            this.m_buttonAddExcavationRegion.TabIndex = 4;
-            this.m_buttonAddExcavationRegion.Text = "地表开挖";
-            this.m_buttonAddExcavationRegion.UseVisualStyleBackColor = true;
-            this.m_buttonAddExcavationRegion.Click += new System.EventHandler(this.m_buttonAddExcavationRegion_Click);
-            // 
-            // m_hScrollBarTransparency
-            // 
-            this.m_hScrollBarTransparency.Enabled = false;
-            this.m_hScrollBarTransparency.Location = new System.Drawing.Point(109, 14);
-            this.m_hScrollBarTransparency.Name = "m_hScrollBarTransparency";
-            this.m_hScrollBarTransparency.Size = new System.Drawing.Size(128, 18);
-            this.m_hScrollBarTransparency.TabIndex = 3;
-            this.m_hScrollBarTransparency.Scroll += new System.Windows.Forms.ScrollEventHandler(this.m_hScrollBarTransparency_Scroll);
-            // 
-            // m_labelTransparency
-            // 
-            this.m_labelTransparency.AutoSize = true;
-            this.m_labelTransparency.Location = new System.Drawing.Point(61, 16);
-            this.m_labelTransparency.Name = "m_labelTransparency";
-            this.m_labelTransparency.Size = new System.Drawing.Size(41, 12);
-            this.m_labelTransparency.TabIndex = 2;
-            this.m_labelTransparency.Text = "透明度";
-            // 
-            // m_checkBoxUnderground
-            // 
-            this.m_checkBoxUnderground.AutoSize = true;
-            this.m_checkBoxUnderground.Location = new System.Drawing.Point(7, 15);
-            this.m_checkBoxUnderground.Name = "m_checkBoxUnderground";
-            this.m_checkBoxUnderground.Size = new System.Drawing.Size(48, 16);
-            this.m_checkBoxUnderground.TabIndex = 0;
-            this.m_checkBoxUnderground.Text = "开启";
-            this.m_checkBoxUnderground.UseVisualStyleBackColor = true;
-            this.m_checkBoxUnderground.CheckedChanged += new System.EventHandler(this.m_checkBoxUnderground_CheckedChanged);
+            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
+            this.button1.Location = new System.Drawing.Point(8, 12);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(20, 20);
+            this.button1.TabIndex = 0;
+            this.button1.Tag = "ViewEntire";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // m_groupBoxSceneProperties
             // 
@@ -284,6 +241,71 @@ namespace Real3Dtest
             this.m_checkBoxStatusBar.UseVisualStyleBackColor = true;
             this.m_checkBoxStatusBar.CheckedChanged += new System.EventHandler(this.m_checkBoxStatusBar_CheckedChanged);
             // 
+            // m_groupBoxUbderground
+            // 
+            this.m_groupBoxUbderground.Controls.Add(this.m_buttonRemoveExcavationRegion);
+            this.m_groupBoxUbderground.Controls.Add(this.m_buttonAddExcavationRegion);
+            this.m_groupBoxUbderground.Controls.Add(this.m_hScrollBarTransparency);
+            this.m_groupBoxUbderground.Controls.Add(this.m_labelTransparency);
+            this.m_groupBoxUbderground.Controls.Add(this.m_checkBoxUnderground);
+            this.m_groupBoxUbderground.Location = new System.Drawing.Point(655, 25);
+            this.m_groupBoxUbderground.Name = "m_groupBoxUbderground";
+            this.m_groupBoxUbderground.Size = new System.Drawing.Size(439, 35);
+            this.m_groupBoxUbderground.TabIndex = 2;
+            this.m_groupBoxUbderground.TabStop = false;
+            this.m_groupBoxUbderground.Text = "地下";
+            // 
+            // m_buttonRemoveExcavationRegion
+            // 
+            this.m_buttonRemoveExcavationRegion.Enabled = false;
+            this.m_buttonRemoveExcavationRegion.Location = new System.Drawing.Point(339, 9);
+            this.m_buttonRemoveExcavationRegion.Name = "m_buttonRemoveExcavationRegion";
+            this.m_buttonRemoveExcavationRegion.Size = new System.Drawing.Size(75, 23);
+            this.m_buttonRemoveExcavationRegion.TabIndex = 5;
+            this.m_buttonRemoveExcavationRegion.Text = "清除";
+            this.m_buttonRemoveExcavationRegion.UseVisualStyleBackColor = true;
+            this.m_buttonRemoveExcavationRegion.Click += new System.EventHandler(this.m_buttonRemoveExcavationRegion_Click);
+            // 
+            // m_buttonAddExcavationRegion
+            // 
+            this.m_buttonAddExcavationRegion.Enabled = false;
+            this.m_buttonAddExcavationRegion.Location = new System.Drawing.Point(249, 9);
+            this.m_buttonAddExcavationRegion.Name = "m_buttonAddExcavationRegion";
+            this.m_buttonAddExcavationRegion.Size = new System.Drawing.Size(75, 23);
+            this.m_buttonAddExcavationRegion.TabIndex = 4;
+            this.m_buttonAddExcavationRegion.Text = "地表开挖";
+            this.m_buttonAddExcavationRegion.UseVisualStyleBackColor = true;
+            this.m_buttonAddExcavationRegion.Click += new System.EventHandler(this.m_buttonAddExcavationRegion_Click);
+            // 
+            // m_hScrollBarTransparency
+            // 
+            this.m_hScrollBarTransparency.Enabled = false;
+            this.m_hScrollBarTransparency.Location = new System.Drawing.Point(109, 14);
+            this.m_hScrollBarTransparency.Name = "m_hScrollBarTransparency";
+            this.m_hScrollBarTransparency.Size = new System.Drawing.Size(128, 18);
+            this.m_hScrollBarTransparency.TabIndex = 3;
+            this.m_hScrollBarTransparency.Scroll += new System.Windows.Forms.ScrollEventHandler(this.m_hScrollBarTransparency_Scroll);
+            // 
+            // m_labelTransparency
+            // 
+            this.m_labelTransparency.AutoSize = true;
+            this.m_labelTransparency.Location = new System.Drawing.Point(61, 16);
+            this.m_labelTransparency.Name = "m_labelTransparency";
+            this.m_labelTransparency.Size = new System.Drawing.Size(41, 12);
+            this.m_labelTransparency.TabIndex = 2;
+            this.m_labelTransparency.Text = "透明度";
+            // 
+            // m_checkBoxUnderground
+            // 
+            this.m_checkBoxUnderground.AutoSize = true;
+            this.m_checkBoxUnderground.Location = new System.Drawing.Point(7, 15);
+            this.m_checkBoxUnderground.Name = "m_checkBoxUnderground";
+            this.m_checkBoxUnderground.Size = new System.Drawing.Size(48, 16);
+            this.m_checkBoxUnderground.TabIndex = 0;
+            this.m_checkBoxUnderground.Text = "开启";
+            this.m_checkBoxUnderground.UseVisualStyleBackColor = true;
+            this.m_checkBoxUnderground.CheckedChanged += new System.EventHandler(this.m_checkBoxUnderground_CheckedChanged);
+            // 
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -363,6 +385,37 @@ namespace Real3Dtest
             this.m_layersControl.Size = new System.Drawing.Size(262, 239);
             this.m_layersControl.TabIndex = 0;
             // 
+            // m_tabControl
+            // 
+            this.m_tabControl.Controls.Add(this.tabPage1);
+            this.m_tabControl.Controls.Add(this.tabPage2);
+            this.m_tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.m_tabControl.Location = new System.Drawing.Point(0, 0);
+            this.m_tabControl.Name = "m_tabControl";
+            this.m_tabControl.SelectedIndex = 0;
+            this.m_tabControl.Size = new System.Drawing.Size(939, 646);
+            this.m_tabControl.TabIndex = 0;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(931, 620);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "场景";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(931, 620);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "空";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
             // m_menuStripMain
             // 
             this.m_menuStripMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -385,7 +438,8 @@ namespace Real3Dtest
             this.m_menuCloseWorkspace,
             this.m_menuFileExit,
             this.m_menuImportTXT,
-            this.m_createDatasource});
+            this.m_createDatasource,
+            this.m_GeoModelBoolCal});
             this.m_menuFile.Name = "m_menuFile";
             this.m_menuFile.Size = new System.Drawing.Size(44, 21);
             this.m_menuFile.Text = "文件";
@@ -393,26 +447,26 @@ namespace Real3Dtest
             // m_menuOpenWorkspace
             // 
             this.m_menuOpenWorkspace.Name = "m_menuOpenWorkspace";
-            this.m_menuOpenWorkspace.Size = new System.Drawing.Size(148, 22);
+            this.m_menuOpenWorkspace.Size = new System.Drawing.Size(180, 22);
             this.m_menuOpenWorkspace.Text = "打开工作空间";
             this.m_menuOpenWorkspace.Click += new System.EventHandler(this.m_menuOpenWorkspace_Click);
             // 
             // m_menuSaveWorkspace
             // 
             this.m_menuSaveWorkspace.Name = "m_menuSaveWorkspace";
-            this.m_menuSaveWorkspace.Size = new System.Drawing.Size(148, 22);
+            this.m_menuSaveWorkspace.Size = new System.Drawing.Size(180, 22);
             this.m_menuSaveWorkspace.Text = "保存工作空间";
             // 
             // m_menuCloseWorkspace
             // 
             this.m_menuCloseWorkspace.Name = "m_menuCloseWorkspace";
-            this.m_menuCloseWorkspace.Size = new System.Drawing.Size(148, 22);
+            this.m_menuCloseWorkspace.Size = new System.Drawing.Size(180, 22);
             this.m_menuCloseWorkspace.Text = "关闭工作空间";
             // 
             // m_menuFileExit
             // 
             this.m_menuFileExit.Name = "m_menuFileExit";
-            this.m_menuFileExit.Size = new System.Drawing.Size(148, 22);
+            this.m_menuFileExit.Size = new System.Drawing.Size(180, 22);
             this.m_menuFileExit.Text = "退出";
             // 
             // m_menuImportTXT
@@ -433,8 +487,8 @@ namespace Real3Dtest
             // m_createDatasource
             // 
             this.m_createDatasource.Name = "m_createDatasource";
-            this.m_createDatasource.Size = new System.Drawing.Size(148, 22);
-            this.m_createDatasource.Text = "新建数据源";
+            this.m_createDatasource.Size = new System.Drawing.Size(180, 22);
+            this.m_createDatasource.Text = "生成三维体模型";
             this.m_createDatasource.Click += new System.EventHandler(this.m_createDatasource_Click);
             // 
             // m_menuLayer
@@ -682,57 +736,12 @@ namespace Real3Dtest
             this.m_cmLayer3DFlyTo.Size = new System.Drawing.Size(160, 22);
             this.m_cmLayer3DFlyTo.Text = "快速定位至图层";
             // 
-            // m_tabControl
+            // m_GeoModelBoolCal
             // 
-            this.m_tabControl.Controls.Add(this.tabPage1);
-            this.m_tabControl.Controls.Add(this.tabPage2);
-            this.m_tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.m_tabControl.Location = new System.Drawing.Point(0, 0);
-            this.m_tabControl.Name = "m_tabControl";
-            this.m_tabControl.SelectedIndex = 0;
-            this.m_tabControl.Size = new System.Drawing.Size(939, 646);
-            this.m_tabControl.TabIndex = 0;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(931, 620);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "场景";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(931, 620);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "空";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.Location = new System.Drawing.Point(4, 0);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(179, 35);
-            this.groupBox1.TabIndex = 2;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "场景控制";
-            // 
-            // button1
-            // 
-            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.Location = new System.Drawing.Point(8, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(20, 20);
-            this.button1.TabIndex = 0;
-            this.button1.Tag = "ViewEntire";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.m_GeoModelBoolCal.Name = "m_GeoModelBoolCal";
+            this.m_GeoModelBoolCal.Size = new System.Drawing.Size(180, 22);
+            this.m_GeoModelBoolCal.Text = "体模型求交集";
+            this.m_GeoModelBoolCal.Click += new System.EventHandler(this.m_GeoModelBoolCal_Click);
             // 
             // MainForm
             // 
@@ -749,10 +758,11 @@ namespace Real3Dtest
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.toolpanel.ResumeLayout(false);
-            this.m_groupBoxUbderground.ResumeLayout(false);
-            this.m_groupBoxUbderground.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
             this.m_groupBoxSceneProperties.ResumeLayout(false);
             this.m_groupBoxSceneProperties.PerformLayout();
+            this.m_groupBoxUbderground.ResumeLayout(false);
+            this.m_groupBoxUbderground.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
@@ -761,12 +771,11 @@ namespace Real3Dtest
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
+            this.m_tabControl.ResumeLayout(false);
             this.m_menuStripMain.ResumeLayout(false);
             this.m_menuStripMain.PerformLayout();
             this.m_contextMenuWorkspace.ResumeLayout(false);
             this.m_contextMenuLayer3D.ResumeLayout(false);
-            this.m_tabControl.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -840,6 +849,7 @@ namespace Real3Dtest
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ToolStripMenuItem m_GeoModelBoolCal;
     }
 }
 

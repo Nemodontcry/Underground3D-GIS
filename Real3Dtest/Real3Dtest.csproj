@@ -94,6 +94,7 @@
   <ItemGroup>
     <Compile Include="Action\AnalystAction.cs" />
     <Compile Include="Action\GeneratePoint.cs" />
+    <Compile Include="Action\GeoModelBoolCal.cs" />
     <Compile Include="Action\Layer3DsAction.cs" />
     <Compile Include="Action\PointsBuildGeoBody.cs" />
     <Compile Include="Action\QueryAction.cs" />

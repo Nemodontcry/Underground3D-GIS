@@ -11,9 +11,10 @@ using SuperMap.Realspace.ThreeDDesigner;
 using Mono.Csv;
 using System.Drawing;
 
+
 namespace Real3Dtest.Action
 {
-    class PointsBuildGeoBody
+    class GeoModelBoolCal
     {
         private Workspace m_workspace;
         private SceneControl m_sceneControl;
@@ -21,7 +22,7 @@ namespace Real3Dtest.Action
         private LayersControl m_layersControl;
         private Datasource m_datasource;
 
-        public PointsBuildGeoBody(WorkspaceControl workspaceControl,
+        public GeoModelBoolCal(WorkspaceControl workspaceControl,
         LayersControl layersControl,
         SceneControl sceneControl,
         Workspace workspace)
@@ -32,16 +33,14 @@ namespace Real3Dtest.Action
             m_workspace = workspace;
         }
 
-        public void testfuc()
+        public void testfunc()
         {
             CreateUDBDatasource();
-            List<List<object>>  csvdata = getCSVfile();
+            List<List<object>> csvdata = getCSVfile();
             DatasetVector targetDataset = CSVtoDataset(csvdata);
-            //TestScene(targetDataset, m_sceneControl.Scene);
+            TestScene(targetDataset, m_sceneControl.Scene);
             Geomodeltest(csvdata);
-            //Recordset recordset = targetDataset.GetRecordset(false, CursorType.Dynamic);
-            //Geometry geometry  = recordset.GetGeometry();
-            //ListAll(recordset);
+
         }
         private void CreateUDBDatasource()
         {
@@ -62,6 +61,7 @@ namespace Real3Dtest.Action
                 Trace.WriteLine(ex.Message);
             }
         }
+
         public List<List<object>> getCSVfile()
         {
             List<List<string>> csvfile = CsvFileReader.ReadAll("I:\\ServerTool\\supermap-iobjectsdotnet-10.1.2-19530-86195-all\\SampleData\\测试数据\\testdata28_500.csv", Encoding.GetEncoding("gbk"));
@@ -123,6 +123,7 @@ namespace Real3Dtest.Action
             return dataset;
         }
 
+
         public void TestScene(DatasetVector targetDataset, Scene sceneObject)
         {
             //进行三维地图场景的设置
@@ -160,70 +161,11 @@ namespace Real3Dtest.Action
             Console.WriteLine("当前三维场景的信息：" + descriptionScene);
         }
 
-        private static void ListAll(Recordset recordset)
-        {
-            //try
-            //{
-                Int32 count = recordset.RecordCount;
-                Console.Write("count " + count);
-                Console.WriteLine();
 
-                PrintWithStar("遍历记录集开始");
-
-                if (count == 0)
-                {
-                    Console.Write(":记录集中没有记录");
-                }
-                else
-                {
-                    String interval = " ";
-                    Console.Write("SmID         Name                        SmGeometry");
-                    Console.WriteLine();
-                    recordset.MoveFirst();
-                    for (Int32 i = 0; i < recordset.RecordCount; i++)
-                    {
-                        if (i > 8)
-                            interval = "";
-                        Object valueID = recordset.GetFieldValue("SmID");
-                        if (valueID == null)
-                            valueID = "";
-                        FieldInfos fieldinfos = recordset.GetFieldInfos();
-                        Feature feature = recordset.GetFeature();
-                    //String str = fieldinfos
-                    //Object valueName = recordset.GetFieldValue("Name");
-                    //    if (valueName == null)
-                    //        valueName = "UserName";
-                        GeoPoint3D geoPoint3D = (GeoPoint3D)recordset.GetGeometry();
-                        Console.Write(valueID + interval + "         " + "valueName" + "       ( " + geoPoint3D.X + " , " + geoPoint3D.Y + " , " + geoPoint3D.Z + " )");
-                        Console.WriteLine();
-                        recordset.MoveNext();
-                    }
-                }
-                Console.WriteLine();
-
-                PrintWithStar("end");
-            //}
-            //catch (Exception ex)
-            //{
-            //    Console.WriteLine(ex.Message);
-            //}
-        }
-        private static void PrintWithStar(String content)
-        {
-            String star = "****************************";
-            content = star + content + star;
-            Console.WriteLine(content);
-        }
 
         public void Geomodeltest(List<List<object>> datagrid)
         {
-            //string filename = System.IO.Path.GetFileName(filepath);
-            //string[] temp = filename.Split('.');
-            //DatasetVectorInfo info = new DatasetVectorInfo(temp[0], DatasetType.Point3D);
-            //DatasetVector dataset = m_datasource.Datasets.Create(info);
-            //Recordset recordset = dataset.GetRecordset(false, CursorType.Dynamic);
 
-            //List<Point3D> point3Darr = new List<Point3D>();
             Point3Ds point3Ds = new Point3Ds();
             List<double> maxHighList = new List<double>();
             List<double> minHighList = new List<double>();
@@ -234,28 +176,17 @@ namespace Real3Dtest.Action
                 double z = (double)datagrid[i][3];
                 double height = (double)datagrid[i][4];
                 maxHighList.Add(z);
-                minHighList.Add(z-height);
+                minHighList.Add(z - height);
                 Point3D tmppoint = new Point3D(x, y, z);
                 point3Ds.Add(tmppoint);
-
-                //GeoPoint3D geoPoint3D = new GeoPoint3D(tmppoint);
-                //recordset.AddNew(geoPoint3D);
-                //recordset.Update();
             }
-            //List<double> maxHighList = new List<double>();
-            //List<double> minHighList = new List<double>();
-            //for (int i = 0; i < point3Ds.Count; i++)
-            //{
-            //    maxHighList.Add(i + 200);
-            //    minHighList.Add(i + 100);
-            //}
-            GeoModel3D geoModel3D = ModelBuilder3D.BuildGeoBody(point3Ds, maxHighList, minHighList);
-            //geoModel3D.IsLonLat = true;
 
 
-            //AltitudeMode altitudeMode = new AltitudeMode();
-            //altitudeMode = AltitudeMode.Absolute;
+            GeoModel3D geoModel3D_1 = ModelBuilder3D.BuildGeoBody(point3Ds, maxHighList, minHighList);
+            maxHighList[1] = 1000;
+            GeoModel3D geoModel3D_2 = ModelBuilder3D.BuildGeoBody(point3Ds, maxHighList, minHighList);
 
+            Geometry3D result = BooleanOperator3D.Union(geoModel3D_1, geoModel3D_2);
 
             //必须设置模型style的高度模式，才可以正常显示高程位置
             //这里使用的是绝对海拔高程模式
@@ -265,17 +196,25 @@ namespace Real3Dtest.Action
             m_style3d.AltitudeMode = AltitudeMode.Absolute;
             m_style3d.FillForeColor = Color.BurlyWood;
             //设置geomodel3d对象的style3d属性
-            geoModel3D.Style3D = m_style3d;
+            geoModel3D_1.Style3D = m_style3d;
 
-            m_sceneControl.Scene.TrackingLayer.Add(geoModel3D, "test");
-            //Add(geoModel3D);
-            //PrjCoordSys dl = new PrjCoordSys();
-            //dl.FromEPSGCode(4326);//4326为GCS_WGS_1984
-            //dataset.PrjCoordSys = dl;
+            GeoStyle3D m_style3d2 = new GeoStyle3D();
+            m_style3d2.AltitudeMode = AltitudeMode.Absolute;
+            m_style3d2.FillForeColor = Color.DarkGray;
+            //设置geomodel3d对象的style3d属性
+            geoModel3D_2.Style3D = m_style3d2;
 
-            //return dataset;
+            GeoStyle3D m_style3d3 = new GeoStyle3D();
+            m_style3d3.AltitudeMode = AltitudeMode.Absolute;
+            m_style3d3.FillForeColor = Color.OrangeRed;
+            //设置geomodel3d对象的style3d属性
+            result.Style3D = m_style3d3;
+
+            //m_sceneControl.Scene.TrackingLayer.Add(geoModel3D_1, "geoModel3D_1");
+            //m_sceneControl.Scene.TrackingLayer.Add(geoModel3D_2, "geoModel3D_2");
+            m_sceneControl.Scene.TrackingLayer.Add(result, "result");
+
         }
-
 
     }
 }
